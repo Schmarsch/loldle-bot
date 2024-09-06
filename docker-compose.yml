@@ -1,0 +1,15 @@
+services:
+  postgres-db:
+    image: postgres:latest
+    container_name: loldle-bot-postgres
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres-db:/var/lib/postgresql/data
+
+volumes:
+  postgres-db:
+    driver: local

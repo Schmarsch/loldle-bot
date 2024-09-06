@@ -1,0 +1,21 @@
+{
+  "name": "loldle-bot",
+  "module": "src/index.ts",
+  "type": "module",
+  "scripts": {
+    "dev": "bun --watch run src/index.ts"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "1.8.3",
+    "@types/bun": "latest",
+    "prisma": "5.19.1"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "@discordjs/builders": "^1.9.0",
+    "@prisma/client": "5.19.1",
+    "discord.js": "^14.16.1"
+  }
+}
