@@ -1,15 +1,21 @@
-# loldle-bot
+# Loldle-Discord-Bot
 
-To install dependencies:
+A simple discord bot that tracks [Loldle](https://loldle.com)scores and maps them to a discord user.
 
-```bash
-bun install
-```
+Todos:
 
-To run:
-
-```bash
-bun run index.ts
-```
-
-This project was created using `bun init` in bun v1.1.26. [Bun](https://bun.sh) is a fast all-in-one JavaScript runtime.
+- [x] Track if a User posts a message with his lodle score of the day
+- [x] Safe the score into a database
+- [ ] Turn Repository into Monorepo to prepare for Wepage
+- [ ] Add Webpage to see stats
+  - [ ] Authenticate User with Discord OAuth
+  - [ ] Display the last weeks scores
+  - [ ] Display a Graph of the Users performance
+  - [ ] Implement Mapping the Tracker to a specific Channel
+- [ ] Expand into other **x** dles
+  - [ ] Worlde
+  - [ ] Wördle
+  - [ ] Valdle
+  - [ ] Pokedle
+  - [ ] Minecraftle
+  - [ ] ... (open for suggestions)
