@@ -6,7 +6,7 @@ Todos:
 
 - [x] Track if a User posts a message with his lodle score of the day
 - [x] Safe the score into a database
-- [ ] Turn Repository into Monorepo to prepare for Wepage
+- [ ] Turn Repository into Monorepo to prepare for Webpage
 - [ ] Add Webpage to see stats
   - [ ] Authenticate User with Discord OAuth
   - [ ] Display the last weeks scores
