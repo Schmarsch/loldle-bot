@@ -19,6 +19,12 @@ model User {
   LoldleDaily LoldleDaily[]
 }
 
+model Parserdle {
+  channelID String @unique @id
+  guildID String
+  parserdleName String
+}
+
 model LoldleDaily {
   id String @id @default(cuid())
 
