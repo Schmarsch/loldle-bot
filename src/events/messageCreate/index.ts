@@ -1,8 +1,12 @@
 import { event } from "../../utils";
 import { prisma } from "../../utils/prisma";
+import { allParsersMap } from "../../parser";
 
 export default event("messageCreate", async ({ log }, interaction) => {
-	if (interaction.channel.id !== "1281719545953783889") return;
+	const parserDB = await prisma.parserdle.findFirst({
+		where: { channelID: interaction.channel.id },
+	})
+	if (!parserDB) return;
 
 	const user = await prisma.user.upsert({
 		where: { id: interaction.author.id },
@@ -14,6 +18,16 @@ export default event("messageCreate", async ({ log }, interaction) => {
 	});
 
 	const message = interaction.content;
+	
+	const parser = (allParsersMap.get(parserDB.parserdleName))
+	if (!parser) throw new Error("No Parser found ...");
+	const result = parser.exec({ 
+		async log(...args: unknown[]) {
+			log(`[${parser.name}]`, ...args);
+		}, 
+		content: message 
+	});
+
 	const lines = message.split("\n").slice(1, 6);
 	const categories: string = lines.map((line) => {
 		let [type, preScore] = line.split(": ");
@@ -36,7 +50,7 @@ export default event("messageCreate", async ({ log }, interaction) => {
       data: {
         date: today,
         userId: user.id,
-        Categories: categories,
+        Categories: result,
       },
     });
 	}
