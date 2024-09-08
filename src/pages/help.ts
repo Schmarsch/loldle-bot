@@ -23,7 +23,6 @@ export const Namespaces = {
 export const Actions = {
 	next: "+",
 	back: "-",
-	close: "x",
 };
 
 const N = Namespaces;
