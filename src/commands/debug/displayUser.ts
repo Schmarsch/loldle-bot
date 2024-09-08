@@ -9,10 +9,10 @@ const meta = PromiseSlashCommandBuilder(
 export default command(meta, async ({ interaction }) => {
 	await interaction.deferReply({ ephemeral: true });
 
-  const users = await prisma.user.findMany()
-  const content = users.map((user) => `${user.name} (${user.id})`).join(", ")
+	const users = await prisma.user.findMany();
+	const content = users.map((user) => `${user.name} (${user.id})`).join(", ");
 
-  return interaction.editReply({
-    content: content.length > 0 ? content : "No users found in the database.",
-  })
+	return interaction.editReply({
+		content: content.length > 0 ? content : "No users found in the database.",
+	});
 });

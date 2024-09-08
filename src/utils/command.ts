@@ -26,9 +26,9 @@ export function PromiseSlashCommandBuilder(
 }
 
 export function category(
-  name: string,
-  commands: Command[],
-  extra: CommandCategoryExtra = {}
+	name: string,
+	commands: Command[],
+	extra: CommandCategoryExtra = {},
 ): CommandCategory {
-  return { name, commands, ...extra }
+	return { name, commands, ...extra };
 }

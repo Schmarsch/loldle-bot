@@ -4,14 +4,16 @@ import events from "../events";
 import keys from "../keys";
 
 const client = new Client({
-	intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageContent],
+	intents: [
+		GatewayIntentBits.Guilds,
+		GatewayIntentBits.GuildMessages,
+		GatewayIntentBits.MessageContent,
+	],
 });
 
-registerEvents(client, events)
+registerEvents(client, events);
 
-client
-	.login(keys.clientToken)
-	.catch((err) => {
-		console.error("[Login Error]", err);
-		process.exit(1);
-	});
+client.login(keys.clientToken).catch((err) => {
+	console.error("[Login Error]", err);
+	process.exit(1);
+});

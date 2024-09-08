@@ -3,7 +3,7 @@ import { getCategoryRoot } from "../../pages/help";
 
 const meta = PromiseSlashCommandBuilder(
 	"help",
-	"Get a list of all commands for the bot."
+	"Get a list of all commands for the bot.",
 );
 
 export default command(meta, async ({ interaction }) => {
