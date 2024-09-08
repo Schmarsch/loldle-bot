@@ -44,12 +44,12 @@ export default event("messageCreate", async ({ log }, interaction) => {
 
   const today = new Date();
 	// create new loldledaily but only if today is not already in the database
-	const loldledaily = await prisma.loldleDaily.findFirst({
+	const loldledaily = await prisma.xdleDaily.findFirst({
 		where: { date: today },
 	});
 
 	if (!loldledaily) {
-    await prisma.loldleDaily.create({
+    await prisma.xdleDaily.create({
       data: {
         date: today,
         userId: user.id,

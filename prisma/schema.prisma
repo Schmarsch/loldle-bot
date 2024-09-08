@@ -16,7 +16,7 @@ datasource db {
 model User {
   id          String        @id
   name        String
-  LoldleDaily LoldleDaily[]
+  XdleDaily   XdleDaily[]
 }
 
 model Parserdle {
@@ -25,7 +25,7 @@ model Parserdle {
   parserdleName String
 }
 
-model LoldleDaily {
+model XdleDaily {
   id String @id @default(cuid())
 
   date DateTime @db.Date
