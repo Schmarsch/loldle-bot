@@ -1,5 +1,11 @@
 import { parser } from "../../utils/parser"
 
+/**
+ * The loldle parser for the website loldle.com
+ * @param content The content of the message
+ * @param log The logger function
+ * @returns The result of the parser
+ */
 export default parser("loldle", ({content, log}) => {
     log("Parsing loldle");
     const lines = content.split("\n").slice(1, 6);
