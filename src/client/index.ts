@@ -7,6 +7,8 @@ const client = new Client({
 	intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageContent],
 });
 
+const unused = 5
+
 registerEvents(client, events)
 
 client
