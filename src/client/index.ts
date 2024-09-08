@@ -11,8 +11,6 @@ const client = new Client({
 	],
 });
 
-const unused = 5;
-
 registerEvents(client, events);
 
 client.login(keys.clientToken).catch((err) => {
