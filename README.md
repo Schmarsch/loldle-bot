@@ -19,3 +19,35 @@ Todos:
   - [ ] Pokedle
   - [ ] Minecraftle
   - [ ] ... (open for suggestions)
+
+## How to write a new parse
+Parsers can be found in the `src/parser` folder. The parsers are distributed in categories. Each category has a folder and the parsers are located in this folder.
+
+Parsers can be created as follows:
+```Typescript
+import { parser } from "../../utils/parser"
+
+// creation of a parser
+export default parser("parsername", ({log, content})=>{
+  return "parserstring"
+})
+```
+A parser must be in a category!
+This is then entered in the corresponding folder in `index.ts`.
+
+## How to write a new parse category
+Parser categories are important to keep an overview of the individual parsers. In addition to the gaming-specific **X** dles, there are also some that come from the original, such as Wordle.
+
+A category can be added as follows:
+```Typescript
+import type { Parser } from "../../types/parsers";
+import { category } from "../../utils/parser";
+import parsername from "./parsername";
+
+// add all parsers to the category
+const all_parsers: Parser[] = [parsername];
+
+// creation of a category
+export default category("newcategory", all_parsers);
+```
+The category should then be added to the list in the file `./src/parser/index.ts` at the end.
