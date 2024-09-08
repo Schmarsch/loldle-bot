@@ -7,15 +7,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Run Check
         run: |
           # Simulating an error
-          echo "::error file=src/index.js,line=10,col=5::Syntax error found in this file"
+          echo "::error file=src/client/index.ts,line=10,col=1::Syntax error found in this file"
           
           # Simulating a warning
-          echo "::warning file=src/index.js,line=15,col=3::Variable is not used"
+          echo "::warning file=src/client/index.ts,line=6,col=7::Variable is not used"
           
           # Simulating a notice
-          echo "::notice file=src/index.js,line=20,col=2::Consider refactoring this code"
+          echo "::notice file=src/client/index.ts,line=12,col=7::Consider refactoring this code"
