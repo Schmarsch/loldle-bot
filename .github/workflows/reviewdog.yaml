@@ -8,11 +8,8 @@ jobs:
       contents: read
       pull-requests: write
     steps:
-      - name: Check out the code
-        uses: actions/checkout@v4
-
-      - name: Run Biome with reviewdog
-        uses: mongolyy/reviewdog-action-biome@v1.6.2
+      - uses: actions/checkout@v4
+      - uses: mongolyy/reviewdog-action-biome@v1
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          reporter: github-pr-check
+          github_token: ${{ secrets.github_token }}
+          reporter: github-pr-review
