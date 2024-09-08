@@ -9,13 +9,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Run Check
-        run: |
-          # Simulating an error
-          echo "::error file=src/client/index.ts,line=10,col=1::Syntax error found in this file"
-          
-          # Simulating a warning
-          echo "::warning file=src/client/index.ts,line=6,col=7::Variable is not used"
-          
-          # Simulating a notice
-          echo "::notice file=src/client/index.ts,line=12,col=7::Consider refactoring this code"
+      - name: Setup Biome
+        uses: biomejs/setup-biome@v2
+        with:
+          version: latest
+
+      - name: Run Biome Check
+        run: biome check --reporter=github
