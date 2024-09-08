@@ -15,4 +15,4 @@ jobs:
           version: latest
 
       - name: Run Biome Check
-        run: biome check --reporter=github
+        run: biome ci --reporter=github
