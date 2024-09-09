@@ -1,6 +1,6 @@
 # Loldle-Discord-Bot
 
-A simple discord bot that tracks [Loldle](https://loldle.com)scores and maps them to a discord user.
+A simple discord bot that tracks [Loldle](https://loldle.net)scores and maps them to a discord user.
 
 Todos:
 
