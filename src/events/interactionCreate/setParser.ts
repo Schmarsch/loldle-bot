@@ -1,6 +1,6 @@
 import { type StringSelectMenuInteraction, EmbedBuilder } from "discord.js";
 import { Actions, getCategoryParsers, getCategoryRoot, Namespaces } from "../../pages/setParser";
-import { createId, EditReply, event, readId, Reply } from "../../utils";
+import { EditReply, event, readId, Reply } from "../../utils";
 import { prisma } from "../../utils/prisma";
 import { getCategoryFromParser } from "../../parser";
 
@@ -12,11 +12,12 @@ export default event("interactionCreate", async ({ log }, interaction) => {
     const [namespace] = readId(interaction.customId);
     // If namespace not in setParser stop
 	if (!Object.values(Namespaces).includes(namespace)) return;
-    const parserdle = prisma.parserdle.findFirst({
+    const parserdle = await prisma.parserdle.findFirst({
         where: {
             channelID: interaction.channel?.id,
         }
     });
+    const isParserdle = parserdle ? true : false;
 
     try {
 		// Defer update
@@ -25,16 +26,16 @@ export default event("interactionCreate", async ({ log }, interaction) => {
         switch (namespace) {
             case Namespaces.categorySelect:
                 const selectedCategory = (interaction as StringSelectMenuInteraction).values[0];
-                return interaction.editReply(getCategoryRoot(selectedCategory));
+                return interaction.editReply(getCategoryRoot(selectedCategory, isParserdle));
             case Namespaces.parserSelect:
                 const selectedParser = (interaction as StringSelectMenuInteraction).values[0];
                 const [_, interactionCategory] = readId(interaction.customId);
-                return interaction.editReply(getCategoryParsers(interactionCategory, selectedParser, false, false));
+                const isSame = parserdle?.parserdleName === selectedParser;
+                return interaction.editReply(getCategoryParsers(interactionCategory, selectedParser, isParserdle, isSame));
             case Namespaces.parserAction:
                 const [__, action, category, parser] = readId(interaction.customId);
-
                 if (action === Actions.set) {
-                   prisma.parserdle.upsert({
+                    const newParser = await prisma.parserdle.upsert({
                         where: {    
                             channelID: interaction.channel.id,
                         },
@@ -47,11 +48,13 @@ export default event("interactionCreate", async ({ log }, interaction) => {
                             parserdleName: parser,
                         },
                     });
-                    return interaction.editReply(getCategoryParsers(category, parser, true, false)); 
+                    return interaction.editReply(
+                        getCategoryParsers(getCategoryFromParser(newParser.parserdleName), newParser.parserdleName, true, true)
+                    ); 
                 }
 
                 if (action === Actions.delete) {
-                    prisma.parserdle.delete({
+                    await prisma.parserdle.delete({
                         where: {
                             channelID: interaction.channel.id,
                         },

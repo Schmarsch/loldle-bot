@@ -9,16 +9,15 @@ const meta = PromiseSlashCommandBuilder(
 )
 
 export default command(meta, 
-    async ({ interaction }) => {
+    async ({ log, interaction }) => {
         await interaction.deferReply({ ephemeral: true });
-        const channelid = interaction.channel?.id;
-        const guildid = interaction.guild?.id;
-
-        if (!channelid || !guildid) return interaction.editReply("Not in a guild channel");
-
+        const channelId = interaction.channel?.id;
+        const guildId = interaction.guild?.id;
+            
+        if (!channelId || !guildId) return interaction.editReply("Not in a guild channel");
         const parserDB = await prisma.parserdle.findFirst({
             where: {
-                channelID: channelid,
+                channelID: channelId,
             }
         });
 

@@ -27,7 +27,7 @@ const mappedCategories = allCategories.map(
             description,
             emoji,
             value: name,
-        }),
+        }).setDefault(false),
 );
 
 // a list of all parsers as select menu options
@@ -38,7 +38,7 @@ const mappedParsers = (category?: string) => allCategories.find((cat) => cat.nam
             description,
             emoji,
             value: name,
-        }),
+        }).setDefault(false),
 ) || [];
 
 // Embed title
@@ -46,8 +46,14 @@ const TITLE = new EmbedBuilder()
 		.setTitle("Set Parser")
 		.setDescription("Set the Parser for this server.");
 
+// Warning text for all ready set
+const ALREADY_SET_TEXT = new EmbedBuilder()
+        .setTitle("Warning")
+        .setDescription("A parser is set already in this Channel.")
+        .setColor("Red");
+
 // Generate root embed for help paginator
-export function getCategoryRoot(category?: string): InteractionReplyOptions {
+export function getCategoryRoot(category?: string, alreadySet?: boolean): InteractionReplyOptions {
 
 	// Create select menu for categories
 	const selectCategoryId = createId(N.categorySelect);
@@ -76,7 +82,7 @@ export function getCategoryRoot(category?: string): InteractionReplyOptions {
         .setCustomId(buttonDeleteId)
         .setLabel("Delete Parser for this Channel")
         .setStyle(ButtonStyle.Danger)
-        .setDisabled(true);
+        .setDisabled(!alreadySet);
     
     if(category){
         selectCategory.setOptions(mappedCategories.map((option) => {
@@ -104,21 +110,17 @@ export function getCategoryRoot(category?: string): InteractionReplyOptions {
 
 	return {
         components: category ? [componentSelectCategory, componentSelectParser, componentActions] : [componentSelectCategory],
-		embeds: [TITLE],
+		embeds: alreadySet ? [TITLE, ALREADY_SET_TEXT]: [TITLE],
 	};
 }
 
-export function getCategoryParsers(category: string, parser: string, allReadySet: boolean, has?: boolean): InteractionReplyOptions {
+export function getCategoryParsers(category: string, parser: string, alreadySet: boolean, has?: boolean): InteractionReplyOptions {
 
-    const warning = !has ? 
+    const warning = !has ? ALREADY_SET_TEXT :
         new EmbedBuilder()
         .setTitle("Warning")
-        .setDescription("A parser is set already in this Channel.")
-        .setColor("Red") : 
-        new EmbedBuilder()
-        .setTitle("Warning")
-        .setDescription("This parser is already set in this Channel.")
-        .setColor("Yellow");
+        .setDescription("This Selected Parser is already Set.")
+        .setColor("Yellow") ;
 
 	// Create select menu for categories
 	const selectCategoryId = createId(N.categorySelect);
@@ -147,7 +149,7 @@ export function getCategoryParsers(category: string, parser: string, allReadySet
         .setCustomId(buttonDeleteId)
         .setLabel("Delete Parser for this Channel")
         .setStyle(ButtonStyle.Danger)
-        .setDisabled(!allReadySet);
+        .setDisabled(!alreadySet);
     
     selectCategory.setOptions(mappedCategories.map((option) => {
         if(option.data.value === category){
@@ -180,7 +182,7 @@ export function getCategoryParsers(category: string, parser: string, allReadySet
     
     return {
         components: [componentSelectCategory, componentSelectParser, componentActions],
-		embeds: allReadySet ? [TITLE,  warning] : [TITLE],
+		embeds: alreadySet ? [TITLE, warning] : [TITLE],
 	};
 
 }
