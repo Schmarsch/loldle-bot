@@ -18,4 +18,9 @@ export default parser("loldle", ({content, log}) => {
 		return `${type}:${score}:${perfect ? 1 : 0}`;
 	}).join(",");
     return categories
-})
+},
+{
+	description: "League of Legends Wordle",
+	emoji: "1282993962235334691"
+}
+);

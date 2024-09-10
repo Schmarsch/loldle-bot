@@ -1,9 +1,9 @@
 import type { Parser } from "../../types/parsers";
 import { category } from "../../utils/parser";
-import loldle from "./loldle";
+import wordle from "./wordle";
 
 // All parsers in the category
-const all_parsers: Parser[] = [loldle];
+const all_parsers: Parser[] = [wordle];
 
 /**
  * The gaming category.
@@ -13,9 +13,7 @@ const all_parsers: Parser[] = [loldle];
  * @property {string} name The name of the category
  * @property {Parser[]} parsers The parsers in the category
  */
-export default category("gaming", all_parsers,
-{
-    description: "The gaming specific **X**dle parsers",
-    emoji: "🎮"
-}
-);
+export default category("original", all_parsers, {
+    description: "The original **X**dle parsers",
+    emoji: "🔠"
+});

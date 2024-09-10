@@ -20,12 +20,23 @@ export interface ParserProps {
 export type ParserExec = (props: ParserProps) => string;
 
 /**
+ * This is for more information about the parser or category
+ * @typedef {Object} ExtraInfo
+ * @property {string} description The description of the parser or category
+ * @property {string} emoji The emoji of the parser or category
+ */
+export interface ExtraInfo {
+    description?: string;
+    emoji?: string;
+}
+
+/**
  * The parser
  * @typedef {Object} Parser
  * @property {string} name The name of the parser
  * @property {ParserExec} exec The function that is executed by the parser
  */
-export interface Parser { 
+export interface Parser extends ExtraInfo { 
     name: string;
     exec: ParserExec;
 }
@@ -36,7 +47,7 @@ export interface Parser {
  * @property {string} name The name of the category
  * @property {Parser[]} parsers The parsers in the category
  */
-export interface Category {
+export interface ParserCategory extends ExtraInfo {
     name: string;
     parsers: Parser[];
 }
