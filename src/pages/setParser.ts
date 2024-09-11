@@ -81,6 +81,7 @@ export function getCategoryRoot(
 		.setMaxValues(1)
 		.addOptions(mappedParsers(category));
 
+	// Set Button for setting the parser
 	const buttonSetId = createId(N.parserAction, A.set);
 	const buttonSet = new ButtonBuilder()
 		.setCustomId(buttonSetId)
@@ -88,6 +89,7 @@ export function getCategoryRoot(
 		.setStyle(ButtonStyle.Success)
 		.setDisabled(true);
 
+	// Delete Button for deleting the parser
 	const buttonDeleteId = createId(N.parserAction, A.delete);
 	const buttonDelete = new ButtonBuilder()
 		.setCustomId(buttonDeleteId)
@@ -95,6 +97,7 @@ export function getCategoryRoot(
 		.setStyle(ButtonStyle.Danger)
 		.setDisabled(!alreadySet);
 
+	// Set the default category
 	if (category) {
 		selectCategory.setOptions(
 			mappedCategories.map((option) => {
@@ -127,12 +130,14 @@ export function getCategoryRoot(
 	};
 }
 
+// Generate Parser and Category selection for setting the parser
 export function getCategoryParsers(
 	category: string,
 	parser: string,
 	alreadySet: boolean,
 	has?: boolean,
 ): InteractionReplyOptions {
+	// Check if the parser is already set and return the warning
 	const warning = !has
 		? ALREADY_SET_TEXT
 		: new EmbedBuilder()
@@ -148,6 +153,7 @@ export function getCategoryParsers(
 		.setMaxValues(1)
 		.addOptions(mappedCategories);
 
+	// Create select menu for parsers
 	const selectParserId = createId(N.parserSelect);
 	const selectParser = new StringSelectMenuBuilder()
 		.setCustomId(selectParserId)
@@ -155,6 +161,7 @@ export function getCategoryParsers(
 		.setMaxValues(1)
 		.addOptions(mappedParsers(category));
 
+	// Set Button for setting the parser
 	const buttonSetId = createId(N.parserAction, A.set, category, parser);
 	const buttonSet = new ButtonBuilder()
 		.setCustomId(buttonSetId)
@@ -162,6 +169,7 @@ export function getCategoryParsers(
 		.setStyle(ButtonStyle.Success)
 		.setDisabled(has);
 
+	// Delete Button for deleting the parser
 	const buttonDeleteId = createId(N.parserAction, A.delete);
 	const buttonDelete = new ButtonBuilder()
 		.setCustomId(buttonDeleteId)
@@ -169,6 +177,7 @@ export function getCategoryParsers(
 		.setStyle(ButtonStyle.Danger)
 		.setDisabled(!alreadySet);
 
+	// Set the default category
 	selectCategory.setOptions(
 		mappedCategories.map((option) => {
 			if (option.data.value === category) {
@@ -178,6 +187,7 @@ export function getCategoryParsers(
 		}),
 	);
 
+	// Set the default parser
 	selectParser.setOptions(
 		mappedParsers(category).map((option) => {
 			if (option.data.value === parser) {

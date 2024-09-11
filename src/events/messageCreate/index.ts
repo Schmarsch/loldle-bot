@@ -9,6 +9,7 @@ export default event("messageCreate", async ({ log }, interaction) => {
 	});
 	if (!parserDB) return;
 
+	// search for the user in the database and create if not found
 	const user = await prisma.user.upsert({
 		where: { id: interaction.author.id },
 		update: {},
@@ -31,20 +32,10 @@ export default event("messageCreate", async ({ log }, interaction) => {
 		content: message,
 	});
 
-	const lines = message.split("\n").slice(1, 6);
-	const categories: string = lines
-		.map((line) => {
-			let [type, preScore] = line.split(": ");
-			type = type.split(" ")[1].toLowerCase();
-			const splitScore = preScore.split(" ");
-			const score = Number.parseInt(splitScore[0]);
-			const perfect = splitScore.length > 1;
-			return `${type}:${score}:${perfect ? 1 : 0}`;
-		})
-		.join(",");
-
 	const today = new Date();
-	// create new loldledaily but only if today is not already in the database
+
+	log("Parsing result", result);
+
 	const loldledaily = await prisma.xdleDaily.findFirst({
 		where: { date: today },
 	});

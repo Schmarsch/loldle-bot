@@ -52,6 +52,7 @@ export default event("interactionCreate", async ({ log }, interaction) => {
 			case Namespaces.parserAction: {
 				const [__, action, category, parser] = readId(interaction.customId);
 				if (action === Actions.set) {
+					// Set the parser for the channel in the database
 					const newParser = await prisma.parserdle.upsert({
 						where: {
 							channelID: interaction.channel.id,
@@ -75,6 +76,7 @@ export default event("interactionCreate", async ({ log }, interaction) => {
 					);
 				}
 				if (action === Actions.delete) {
+					// Delete the parser for the channel in the database
 					await prisma.parserdle.delete({
 						where: {
 							channelID: interaction.channel.id,
