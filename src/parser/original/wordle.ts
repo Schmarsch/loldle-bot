@@ -6,12 +6,14 @@ import { parser } from "../../utils/parser";
  * @param log The logger function
  * @returns The result of the parser
  */
-export default parser("wordle", ({content, log}) => {
-    log("Parsing wordle", content);
-    return "win"
-},
-{
-    description: "the original wordle",
-    emoji: "1282997096386920492"
-}
+export default parser(
+	"wordle",
+	({ content, log }) => {
+		log("Parsing wordle", content);
+		return "win";
+	},
+	{
+		description: "the original wordle",
+		emoji: "1282997096386920492",
+	},
 );

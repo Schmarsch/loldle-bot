@@ -1,4 +1,9 @@
-import type { ParserCategory, Parser, ParserExec, ExtraInfo } from "../types/parsers";
+import type {
+	ParserCategory,
+	Parser,
+	ParserExec,
+	ExtraInfo,
+} from "../types/parsers";
 
 /**
  * Create a new parser object with the given name and exec function
@@ -7,8 +12,12 @@ import type { ParserCategory, Parser, ParserExec, ExtraInfo } from "../types/par
  * @param extra extra information about the parser
  * @returns the parser object
  */
-export function parser(name: string, exec: ParserExec, extra: ExtraInfo = {}): Parser {
-    return { name, exec, ...extra };
+export function parser(
+	name: string,
+	exec: ParserExec,
+	extra: ExtraInfo = {},
+): Parser {
+	return { name, exec, ...extra };
 }
 
 /**
@@ -18,6 +27,10 @@ export function parser(name: string, exec: ParserExec, extra: ExtraInfo = {}): P
  * @param extra extra information about the category
  * @returns the category object
  */
-export function category(name: string, parsers: Parser[], extra: ExtraInfo = {}): ParserCategory {
-    return { name, parsers, ...extra };
+export function category(
+	name: string,
+	parsers: Parser[],
+	extra: ExtraInfo = {},
+): ParserCategory {
+	return { name, parsers, ...extra };
 }

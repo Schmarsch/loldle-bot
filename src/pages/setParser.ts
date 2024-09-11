@@ -52,7 +52,7 @@ const ALREADY_SET_TEXT = new EmbedBuilder()
         .setDescription("A parser is set already in this Channel.")
         .setColor("Red");
 
-// Generate root embed for help paginator
+// Generate root embed for Parser Category selection
 export function getCategoryRoot(category?: string, alreadySet?: boolean): InteractionReplyOptions {
 
 	// Create select menu for categories
@@ -63,6 +63,7 @@ export function getCategoryRoot(category?: string, alreadySet?: boolean): Intera
 		.setMaxValues(1)
 		.addOptions(mappedCategories);
 
+    // Create select menu for parsers
     const selectParserId = createId(N.parserSelect, category);
     const selectParser = new StringSelectMenuBuilder()
         .setCustomId(selectParserId)

@@ -7,7 +7,7 @@ import type { LoggerFunction } from "./Logger";
  * @property {LoggerFunction} log The logger function
  */
 export interface ParserProps {
-    content: string;
+	content: string;
 	log: LoggerFunction;
 }
 
@@ -26,8 +26,8 @@ export type ParserExec = (props: ParserProps) => string;
  * @property {string} emoji The emoji of the parser or category
  */
 export interface ExtraInfo {
-    description?: string;
-    emoji?: string;
+	description?: string;
+	emoji?: string;
 }
 
 /**
@@ -36,9 +36,9 @@ export interface ExtraInfo {
  * @property {string} name The name of the parser
  * @property {ParserExec} exec The function that is executed by the parser
  */
-export interface Parser extends ExtraInfo { 
-    name: string;
-    exec: ParserExec;
+export interface Parser extends ExtraInfo {
+	name: string;
+	exec: ParserExec;
 }
 
 /**
@@ -48,6 +48,6 @@ export interface Parser extends ExtraInfo {
  * @property {Parser[]} parsers The parsers in the category
  */
 export interface ParserCategory extends ExtraInfo {
-    name: string;
-    parsers: Parser[];
+	name: string;
+	parsers: Parser[];
 }

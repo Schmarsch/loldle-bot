@@ -140,7 +140,7 @@ export async function getCategoryPage(
 		.setLabel("Next")
 		.setStyle(ButtonStyle.Success)
 		.setDisabled(offset >= category.commands.length - 1);
-    
+
 	const component = new ActionRowBuilder<ButtonBuilder>().addComponents(
 		backButton,
 		rootButton,

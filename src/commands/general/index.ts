@@ -1,6 +1,4 @@
 import { category } from "../../utils";
-import help from "./help"
+import help from "./help";
 
-export default category("General", [
-  help
-])
+export default category("General", [help]);
