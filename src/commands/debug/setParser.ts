@@ -1,7 +1,7 @@
-import { PromiseSlashCommandBuilder, command } from "../../utils";
-import { getCategoryFromParser } from "../../parser";
-import { prisma } from "../../utils/prisma";
 import { getCategoryParsers, getCategoryRoot } from "../../pages/setParser";
+import { getCategoryFromParser } from "../../parser";
+import { PromiseSlashCommandBuilder, command } from "../../utils";
+import { prisma } from "../../utils/prisma";
 
 const meta = PromiseSlashCommandBuilder(
 	"setparser",

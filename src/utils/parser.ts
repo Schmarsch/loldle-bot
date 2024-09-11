@@ -1,8 +1,8 @@
 import type {
-	ParserCategory,
-	Parser,
-	ParserExec,
 	ExtraInfo,
+	Parser,
+	ParserCategory,
+	ParserExec,
 } from "../types/parsers";
 
 /**

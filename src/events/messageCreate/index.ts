@@ -1,6 +1,6 @@
+import { allParsersMap } from "../../parser";
 import { event } from "../../utils";
 import { prisma } from "../../utils/prisma";
-import { allParsersMap } from "../../parser";
 
 export default event("messageCreate", async ({ log }, interaction) => {
 	// search for the parserdle from channel in the database

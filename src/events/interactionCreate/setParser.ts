@@ -1,13 +1,13 @@
-import { type StringSelectMenuInteraction, EmbedBuilder } from "discord.js";
+import { EmbedBuilder, type StringSelectMenuInteraction } from "discord.js";
 import {
 	Actions,
+	Namespaces,
 	getCategoryParsers,
 	getCategoryRoot,
-	Namespaces,
 } from "../../pages/setParser";
-import { EditReply, event, readId, Reply } from "../../utils";
-import { prisma } from "../../utils/prisma";
 import { getCategoryFromParser } from "../../parser";
+import { EditReply, Reply, event, readId } from "../../utils";
+import { prisma } from "../../utils/prisma";
 
 export default event("interactionCreate", async ({ log }, interaction) => {
 	if (!interaction.isButton() && !interaction.isStringSelectMenu()) return;
@@ -22,20 +22,20 @@ export default event("interactionCreate", async ({ log }, interaction) => {
 			channelID: interaction.channel?.id,
 		},
 	});
-	const isParserdle = parserdle ? true : false;
 
 	try {
 		// Defer update
 		await interaction.deferUpdate();
 
 		switch (namespace) {
-			case Namespaces.categorySelect:
+			case Namespaces.categorySelect: {
 				const selectedCategory = (interaction as StringSelectMenuInteraction)
 					.values[0];
 				return interaction.editReply(
-					getCategoryRoot(selectedCategory, isParserdle),
+					getCategoryRoot(selectedCategory, !!parserdle),
 				);
-			case Namespaces.parserSelect:
+			}
+			case Namespaces.parserSelect: {
 				const selectedParser = (interaction as StringSelectMenuInteraction)
 					.values[0];
 				const [_, interactionCategory] = readId(interaction.customId);
@@ -44,11 +44,12 @@ export default event("interactionCreate", async ({ log }, interaction) => {
 					getCategoryParsers(
 						interactionCategory,
 						selectedParser,
-						isParserdle,
+						!!parserdle,
 						isSame,
 					),
 				);
-			case Namespaces.parserAction:
+			}
+			case Namespaces.parserAction: {
 				const [__, action, category, parser] = readId(interaction.customId);
 				if (action === Actions.set) {
 					const newParser = await prisma.parserdle.upsert({
@@ -73,7 +74,6 @@ export default event("interactionCreate", async ({ log }, interaction) => {
 						),
 					);
 				}
-
 				if (action === Actions.delete) {
 					await prisma.parserdle.delete({
 						where: {
@@ -95,6 +95,7 @@ export default event("interactionCreate", async ({ log }, interaction) => {
 					});
 				}
 				throw new Error("Invalid namespace reached ...");
+			}
 			default:
 				throw new Error("Invalid namespace reached ...");
 		}

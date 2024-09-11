@@ -1,11 +1,11 @@
 import { SlashCommandBuilder } from "discord.js";
 import type {
 	Command,
+	CommandAutocompleteExec,
 	CommandCategory,
 	CommandCategoryExtra,
 	CommandExec,
 	CommandMeta,
-	CommandAutocompleteExec,
 } from "../types";
 
 export function command(

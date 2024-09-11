@@ -1,6 +1,6 @@
 import commands from "../../commands";
 import type { Command } from "../../types";
-import { EditReply, event, Reply } from "../../utils";
+import { EditReply, Reply, event } from "../../utils";
 
 const allCommands = commands.flatMap(({ commands }) => commands);
 const allCommandsMap: Promise<Map<string, Command>> = (async () => {

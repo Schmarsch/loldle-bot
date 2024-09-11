@@ -1,5 +1,5 @@
-import { PromiseSlashCommandBuilder, command } from "../../utils";
 import { getCategoryRoot } from "../../pages/help";
+import { PromiseSlashCommandBuilder, command } from "../../utils";
 
 const meta = PromiseSlashCommandBuilder(
 	"help",

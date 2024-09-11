@@ -1,16 +1,15 @@
 import {
 	type APIEmbedField,
+	ActionRowBuilder,
+	ButtonBuilder,
 	ButtonStyle,
 	EmbedBuilder,
 	type InteractionReplyOptions,
-	StringSelectMenuOptionBuilder,
-	ActionRowBuilder,
 	StringSelectMenuBuilder,
-	ButtonBuilder,
+	StringSelectMenuOptionBuilder,
 } from "discord.js";
 import CategoryRoot from "../commands";
 import { chunk, createId, readId } from "../utils";
-import category from "../commands/debug/index";
 
 // Namespaces we will use
 export const Namespaces = {

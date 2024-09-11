@@ -1,6 +1,6 @@
 import type { StringSelectMenuInteraction } from "discord.js";
-import { getCategoryPage, getCategoryRoot, Namespaces } from "../../pages/help";
-import { createId, EditReply, event, readId, Reply } from "../../utils";
+import { Namespaces, getCategoryPage, getCategoryRoot } from "../../pages/help";
+import { EditReply, Reply, createId, event, readId } from "../../utils";
 
 export default event("interactionCreate", async ({ log }, interaction) => {
 	if (!interaction.isButton() && !interaction.isStringSelectMenu()) return;
