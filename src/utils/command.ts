@@ -1,11 +1,11 @@
 import { SlashCommandBuilder } from "discord.js";
 import type {
 	Command,
+	CommandAutocompleteExec,
 	CommandCategory,
 	CommandCategoryExtra,
 	CommandExec,
 	CommandMeta,
-	CommandAutocompleteExec,
 } from "../types";
 
 export function command(
@@ -26,9 +26,9 @@ export function PromiseSlashCommandBuilder(
 }
 
 export function category(
-  name: string,
-  commands: Command[],
-  extra: CommandCategoryExtra = {}
+	name: string,
+	commands: Command[],
+	extra: CommandCategoryExtra = {},
 ): CommandCategory {
-  return { name, commands, ...extra }
+	return { name, commands, ...extra };
 }

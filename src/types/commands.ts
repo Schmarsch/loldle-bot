@@ -4,7 +4,7 @@ import type {
 	ChatInputCommandInteraction,
 	Client,
 	SlashCommandBuilder,
-  SlashCommandOptionsOnlyBuilder,
+	SlashCommandOptionsOnlyBuilder,
 } from "discord.js";
 import type { LoggerFunction } from "./Logger";
 
@@ -27,7 +27,7 @@ export type CommandAutocompleteExec = (
 export type CommandMeta =
 	| Promise<SlashCommandBuilder>
 	| Promise<Omit<SlashCommandBuilder, "addSubcommand" | "addSubcommandGroup">>
-  | Promise<SlashCommandOptionsOnlyBuilder>;
+	| Promise<SlashCommandOptionsOnlyBuilder>;
 export interface Command {
 	meta: CommandMeta;
 	exec: CommandExec;
@@ -40,6 +40,6 @@ export interface CommandCategoryExtra {
 }
 
 export interface CommandCategory extends CommandCategoryExtra {
-  name: string;
-  commands: Command[];
+	name: string;
+	commands: Command[];
 }

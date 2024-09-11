@@ -16,10 +16,16 @@ datasource db {
 model User {
   id          String        @id
   name        String
-  LoldleDaily LoldleDaily[]
+  XdleDaily   XdleDaily[]
 }
 
-model LoldleDaily {
+model Parserdle {
+  channelID String @unique @id
+  guildID String
+  parserdleName String
+}
+
+model XdleDaily {
   id String @id @default(cuid())
 
   date DateTime @db.Date

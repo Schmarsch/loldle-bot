@@ -1,4 +1,4 @@
-import { REST, Routes, type APIUser } from "discord.js";
+import { type APIUser, REST, Routes } from "discord.js";
 import commands from "../commands";
 import keys from "../keys";
 

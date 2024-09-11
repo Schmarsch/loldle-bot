@@ -1,16 +1,15 @@
 import {
 	type APIEmbedField,
+	ActionRowBuilder,
+	ButtonBuilder,
 	ButtonStyle,
 	EmbedBuilder,
 	type InteractionReplyOptions,
-	StringSelectMenuOptionBuilder,
-	ActionRowBuilder,
 	StringSelectMenuBuilder,
-	ButtonBuilder,
+	StringSelectMenuOptionBuilder,
 } from "discord.js";
 import CategoryRoot from "../commands";
 import { chunk, createId, readId } from "../utils";
-import category from "../commands/debug/index";
 
 // Namespaces we will use
 export const Namespaces = {
@@ -23,7 +22,6 @@ export const Namespaces = {
 export const Actions = {
 	next: "+",
 	back: "-",
-	close: "x",
 };
 
 const N = Namespaces;
@@ -141,7 +139,7 @@ export async function getCategoryPage(
 		.setLabel("Next")
 		.setStyle(ButtonStyle.Success)
 		.setDisabled(offset >= category.commands.length - 1);
-    
+
 	const component = new ActionRowBuilder<ButtonBuilder>().addComponents(
 		backButton,
 		rootButton,
