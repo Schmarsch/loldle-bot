@@ -1,9 +1,10 @@
 import type { Parser } from "../../types/parsers";
 import { category } from "../../utils/parser";
+import woerdle from "./woerdle";
 import wordle from "./wordle";
 
 // All parsers in the category
-const all_parsers: Parser[] = [wordle];
+const all_parsers: Parser[] = [wordle, woerdle];
 
 /**
  * The gaming category.
