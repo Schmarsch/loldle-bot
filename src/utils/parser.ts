@@ -1,3 +1,4 @@
+import { allCategories } from "../parser";
 import type {
 	ExtraInfo,
 	Parser,
@@ -33,4 +34,27 @@ export function category(
 	extra: ExtraInfo = {},
 ): ParserCategory {
 	return { name, parsers, ...extra };
+}
+
+/**
+ * Create a new parser category with the given name and parsers
+ * @param name category name identifier
+ * @param parsers parsers in the category
+ * @returns id of the parser category
+ */
+export function createParserID(category: ParserCategory, parser: Parser): string {
+	return `${category.name};${parser.name}`;
+}
+
+/**
+ * Read the parser category and parser from the given id
+ * @param id parser id
+ * @returns the parser category and parser or undefined if not found
+ */
+export function readParserID(id: string): [ParserCategory, Parser] | undefined {
+	const [categoryName, parserName] = id.split(";");
+	const category = allCategories.find((category) => category.name === categoryName);
+	const parser = category?.parsers.find((parser) => parser.name === parserName);
+	if (!category || !parser) return undefined;
+	return [category, parser];
 }
