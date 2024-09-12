@@ -12,8 +12,8 @@ export default parser(
 		log("Parsing wordle:\n", content);
 		const lines = content.split("\n");
 		const titleInfos = lines[0].split(" ");
-		const word = Number(titleInfos[1].replace(',', '').replace('#',''));
-		const tries = Number(titleInfos[2].split("/")[0].replace('X','-1'));
+		const word = Number(titleInfos[1].replace(",", "").replace("#", ""));
+		const tries = Number(titleInfos[2].split("/")[0].replace("X", "-1"));
 		const guesses = lines.slice(2);
 
 		// transform the guesses to the correct format

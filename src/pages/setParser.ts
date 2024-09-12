@@ -40,16 +40,14 @@ const mappedCategories = allCategories.map(({ name, description, emoji }) =>
 const mappedParsers = (category?: string) =>
 	allCategories
 		.find((cat) => cat.name === category)
-		?.parsers.map(({ name, description, emoji }) =>
-		{
+		?.parsers.map(({ name, description, emoji }) => {
 			return new StringSelectMenuOptionBuilder({
 				label: name,
 				description,
 				emoji,
 				value: name,
 			}).setDefault(false);
-		}
-		) || [];
+		}) || [];
 
 // Embed title
 const TITLE = new EmbedBuilder()
