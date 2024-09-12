@@ -21,7 +21,9 @@ export default command(meta, async ({ log, interaction }) => {
 		},
 	});
 
-	return parserDB
+	if (!parserDB) return interaction.editReply(getCategoryRoot());
+
+	return getCategoryFromParser(parserDB.parserdleName) !== "Unknown"
 		? interaction.editReply(
 				getCategoryParsers(
 					getCategoryFromParser(parserDB.parserdleName),
@@ -30,5 +32,5 @@ export default command(meta, async ({ log, interaction }) => {
 					true,
 				),
 			)
-		: interaction.editReply(getCategoryRoot());
+		: interaction.editReply(getCategoryRoot(undefined, undefined, true));
 });

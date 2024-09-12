@@ -12,15 +12,15 @@ import { createId } from "../utils";
 
 // Namespaces we will use
 export const Namespaces = {
-	parserSelect: "set_parser_parser_select",
+	parserSelect: "set_parser_select",
 	categorySelect: "set_parser_category_select",
-	parserAction: "set_parser_parser_action",
+	parserAction: "set_parser_action",
 };
 
 // Actions we will use
 export const Actions = {
-	set: "setParser",
-	delete: "deleteParser",
+	set: "+",
+	delete: "-",
 };
 
 const N = Namespaces;
@@ -51,8 +51,8 @@ const mappedParsers = (category?: string) =>
 
 // Embed title
 const TITLE = new EmbedBuilder()
-	.setTitle("Set Parser")
-	.setDescription("Set the Parser for this server.");
+	.setTitle("Set parser")
+	.setDescription("Set the parser for this server.");
 
 // Warning text for all ready set
 const ALREADY_SET_TEXT = new EmbedBuilder()
@@ -60,10 +60,16 @@ const ALREADY_SET_TEXT = new EmbedBuilder()
 	.setDescription("A parser is set already in this Channel.")
 	.setColor("Red");
 
+const PARSER_IS_NO_LONGER_AVAILABLE = new EmbedBuilder()
+	.setTitle("Warning")
+	.setDescription("This channel's parser is no longer available.")
+	.setColor("Red");
+
 // Generate root embed for Parser Category selection
 export function getCategoryRoot(
 	category?: string,
 	alreadySet?: boolean,
+	noLongerAvailable?: boolean,
 ): InteractionReplyOptions {
 	// Create select menu for categories
 	const selectCategoryId = createId(N.categorySelect);
@@ -122,11 +128,19 @@ export function getCategoryRoot(
 		buttonDelete,
 	);
 
+	const embeds = [TITLE];
+	if (alreadySet) {
+		embeds.push(ALREADY_SET_TEXT);
+	}
+	if (noLongerAvailable) {
+		embeds.push(PARSER_IS_NO_LONGER_AVAILABLE);
+	}
+
 	return {
 		components: category
 			? [componentSelectCategory, componentSelectParser, componentActions]
 			: [componentSelectCategory],
-		embeds: alreadySet ? [TITLE, ALREADY_SET_TEXT] : [TITLE],
+		embeds,
 	};
 }
 
@@ -136,6 +150,7 @@ export function getCategoryParsers(
 	parser: string,
 	alreadySet: boolean,
 	has?: boolean,
+	noLongerAvailable?: boolean,
 ): InteractionReplyOptions {
 	// Check if the parser is already set and return the warning
 	const warning = !has
@@ -210,12 +225,20 @@ export function getCategoryParsers(
 		buttonDelete,
 	);
 
+	const embeds = [TITLE];
+	if (alreadySet) {
+		embeds.push(warning);
+	}
+	if (noLongerAvailable) {
+		embeds.push(PARSER_IS_NO_LONGER_AVAILABLE);
+	}
+
 	return {
 		components: [
 			componentSelectCategory,
 			componentSelectParser,
 			componentActions,
 		],
-		embeds: alreadySet ? [TITLE, warning] : [TITLE],
+		embeds,
 	};
 }
