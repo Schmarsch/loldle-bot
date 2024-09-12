@@ -41,12 +41,14 @@ const mappedParsers = (category?: string) =>
 	allCategories
 		.find((cat) => cat.name === category)
 		?.parsers.map(({ name, description, emoji }) =>
-			new StringSelectMenuOptionBuilder({
+		{
+			return new StringSelectMenuOptionBuilder({
 				label: name,
 				description,
 				emoji,
 				value: name,
-			}).setDefault(false),
+			}).setDefault(false);
+		}
 		) || [];
 
 // Embed title
@@ -169,12 +171,13 @@ export function getCategoryParsers(
 		.addOptions(mappedCategories);
 
 	// Create select menu for parsers
-	const selectParserId = createId(N.parserSelect);
+	const selectOptions = mappedParsers(category);
+	const selectParserId = createId(N.parserSelect, category);
 	const selectParser = new StringSelectMenuBuilder()
 		.setCustomId(selectParserId)
 		.setPlaceholder("Parser")
 		.setMaxValues(1)
-		.addOptions(mappedParsers(category));
+		.addOptions(selectOptions);
 
 	// Set Button for setting the parser
 	const buttonSetId = createId(N.parserAction, A.set, category, parser);
