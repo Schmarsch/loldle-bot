@@ -13,8 +13,8 @@ Todos:
   - [ ] Display a Graph of the Users performance
   - [ ] Implement Mapping the Tracker to a specific Channel
 - [ ] Expand into other **x** dles
-  - [ ] Worlde
-  - [ ] Wördle
+  - [x] Worlde
+  - [x] Wördle
   - [ ] Valdle
   - [ ] Pokedle
   - [ ] Minecraftle
