@@ -17,11 +17,19 @@ export default event("interactionCreate", async ({ log }, interaction) => {
 	const [namespace] = readId(interaction.customId);
 	// If namespace not in setParser stop
 	if (!Object.values(Namespaces).includes(namespace)) return;
-	const parserdle = await prisma.parserdle.findFirst({
+	let parserdle = await prisma.parserdle.findFirst({
 		where: {
 			channelID: interaction.channel?.id,
 		},
 	});
+	let noLongerAvailable = false;
+	if (parserdle?.parserdleName) {
+		const cat = getCategoryFromParser(parserdle.parserdleName);
+		if (cat === "Unknown") {
+			parserdle = null;
+			noLongerAvailable = true;
+		}
+	}
 
 	try {
 		// Defer update
@@ -32,7 +40,7 @@ export default event("interactionCreate", async ({ log }, interaction) => {
 				const selectedCategory = (interaction as StringSelectMenuInteraction)
 					.values[0];
 				return interaction.editReply(
-					getCategoryRoot(selectedCategory, !!parserdle),
+					getCategoryRoot(selectedCategory, !!parserdle, noLongerAvailable),
 				);
 			}
 			case Namespaces.parserSelect: {
@@ -46,6 +54,7 @@ export default event("interactionCreate", async ({ log }, interaction) => {
 						selectedParser,
 						!!parserdle,
 						isSame,
+						noLongerAvailable,
 					),
 				);
 			}
